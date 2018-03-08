@@ -1,88 +1,86 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { switchOrder, changeRating } from '../actions/index'
+import { switchOrder, placeTo, changeRating } from '../actions/index'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
-import Item from '../components/Item'
+import Item from '../containers/Item'
+
+// a little function to help us with reordering the result
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+  
+    return result;
+};
+  
 
 class List extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
     }
-    double = {
-        flag: true,
-        first: 0,
-        second: 0
-    };
-    handleDoubleClick = (e) => {
-        let clicked = +e.target.getAttribute('data-id');
-
-        this.double.flag ?
-            this.double = {...this.double, flag: false, first: clicked} :
-            this.double = {...this.double, flag: true, second: clicked};
-
-        if (this.double.flag) {
-            this.props.switchOrder(this.props.fetchedData, this.double.first, this.double.second);
-        }
-
-    };
-    handleUpDown = (e) => {
-        let direction = e.target.getAttribute('data-direction');
-        let clicked = +e.target.getAttribute('data-id');
-
-        if (direction === 'down' && clicked !== this.props.fetchedData.length - 1) {
-            this.props.switchOrder(this.props.fetchedData, clicked, clicked + 1);
-        }
-        else if (direction === 'up' && clicked !== 0) {
-            this.props.switchOrder(this.props.fetchedData, clicked, clicked - 1);
-        }
-    };
-    handleRatingUpDown = (e) => {
-        let direction = e.target.getAttribute('data-rating');
-        let clicked = +e.target.getAttribute('data-id');
-
-        this.props.changeRating(this.props.fetchedData, direction, clicked);
-    };
+    onDragEnd = result => {
+        if (!result.destination) return; // dropped outside the list
+        this.props.placeTo(this.props.fetchedData, result.source.index, result.destination.index);
+    }
     renderItem() {
         if (!Array.isArray(this.props.fetchedData)) return <p>{this.props.fetchedData}</p>; //если пришла ошибка 400 - выводим ответ TODO: возможно ее лучше запихать в рендер
         return this.props.fetchedData.map((el,i)=>{
             return (
-                <div  key={i} className={'row p-2' + (el.is_answered ? ' items__answered' : '')}>
-                    <div className="col-8 items__info" onDoubleClick={this.handleDoubleClick}>
-                        <Item key={i}
-                            id={i}
-                            title={el.title}
-                            score={el.score}
-                            user_name={el.owner.display_name}
-                            user_rating={el.owner.reputation}
-                            views={el.view_count}
-                            last_activity_date={el.last_activity_date}
-                        />
-                    </div>
-                    <div className="col-4 items__nav">
-                        <div className="items__up" data-id={i} data-direction="up" onClick={this.handleUpDown}>up</div>
-                        <div className="items__down" data-id={i} data-direction="down" onClick={this.handleUpDown}>down</div>
-                        <div className="items__rating-up" data-id={i} data-rating="up" onClick={this.handleRatingUpDown}>+</div>
-                        <div className="items__score">{el.score}</div>
-                        <div className="items__rating-down" data-id={i} data-rating="down" onClick={this.handleRatingUpDown}>-</div>
-                    </div>
-                </div>
+                <Draggable key={i} draggableId={i} index={i}>
+                    {(provided, snapshot) => (
+                        <div>
+                            <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                className="items__deck2"
+                            >
+
+                                <Item key={i}
+                                    id={i}
+                                    title={el.title}
+                                    score={el.score}
+                                    user_name={el.owner.display_name}
+                                    user_rating={el.owner.reputation}
+                                    views={el.view_count}
+                                    last_activity_date={el.last_activity_date}
+                                    is_answered={el.is_answered ? ' items__answered' : ''}
+                                />
+
+                            </div>
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Draggable>
             )
         });
     }
     render() {
         return(
-            <div className="row items">
-                <div className="col-12">
-                    {this.renderItem()}
-                </div>
-            </div>
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId="droppable">
+                    {(provided, snapshot) => (
+                        <div ref={provided.innerRef}>
+
+                            <div className="row items">
+                                <div className="col-12">
+                                    {this.renderItem()}
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
         )
     }
 }
 
 const mapStateToProps = state => {return { fetchedData: state.data }};
-const mapDispatchToProps = dispatch => bindActionCreators({ switchOrder, changeRating }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ switchOrder, placeTo, changeRating }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)

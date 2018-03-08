@@ -16,6 +16,7 @@
         "express": "^4.16.2",
         "moment": "^2.21.0",
         "react": "^16.2.0",
+        "react-beautiful-dnd": "^5.0.0",
         "react-datepicker": "^1.2.2",
         "react-dom": "^16.2.0",
         "react-redux": "^5.0.7",

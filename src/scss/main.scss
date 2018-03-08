@@ -27,7 +27,14 @@ header {
 }
 
 .items {
-    border: solid 1px;
+    // border: solid 1px;
+    .items__deck {
+        background-color: silver;
+        // margin-bottom: 10px;
+    }
+    .items__deck2 {
+        padding: 0 15px 10px;
+    }
     &>div {
         border-bottom: solid 1px;
         // padding: 10px;
@@ -36,7 +43,7 @@ header {
             border-bottom: none
         }
     }
-    &__answered {
+    &__answered.items__deck {
         background-color: green;
     }
     &__hidden {
@@ -53,5 +60,6 @@ header {
         border: dashed 1px;
         margin: 5px;
         display: inline-block;
+        cursor: pointer;
     }
 }
