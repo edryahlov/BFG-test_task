@@ -38,10 +38,12 @@ class Header extends Component {
     };
     render() {
         return(
-            <header>
-                5 самых популярных вопросов на StackOverFlow, содержащих "react-redux" в наименовании, начиная с
-                <DatePicker selected={this.state.startDate} maxDate={moment()} onSelect={this.handleChange} todayButton="Сегодня"/>
-                <button onClick={this.handleButton} className={this.state.buttonActive ? 'visible': 'hidden'}>Поиск</button>
+            <header className="row">
+                <div className="col-12">
+                    5 самых популярных вопросов на StackOverFlow, содержащих "react-redux" в наименовании, начиная с
+                    <DatePicker selected={this.state.startDate} maxDate={moment()} onSelect={this.handleChange} todayButton="Сегодня"/>
+                    <button onClick={this.handleButton} className={this.state.buttonActive ? 'visible': 'hidden'}>Поиск</button>
+                </div>
             </header>
         )
     }

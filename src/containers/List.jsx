@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { switchOrder, changeRating } from "../actions/index"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { switchOrder, changeRating } from '../actions/index'
 
 import Item from '../components/Item'
 
@@ -16,7 +16,6 @@ class List extends Component {
         second: 0
     };
     handleDoubleClick = (e) => {
-        //TODO: проверить потом doubleClick - не будет ли срабатывать при смене рейтинга
         let clicked = +e.target.getAttribute('data-id');
 
         this.double.flag ?
@@ -49,28 +48,35 @@ class List extends Component {
         if (!Array.isArray(this.props.fetchedData)) return <p>{this.props.fetchedData}</p>; //если пришла ошибка 400 - выводим ответ TODO: возможно ее лучше запихать в рендер
         return this.props.fetchedData.map((el,i)=>{
             return (
-                <div onDoubleClick={this.handleDoubleClick} key={i} className={(el.is_answered ? 'items__answered' : '')}>
-                    <div className="items__up" data-id={i} data-direction="up" onClick={this.handleUpDown}>up</div>
-                    <div className="items__down" data-id={i} data-direction="down" onClick={this.handleUpDown}>down</div>
-                    <div className="items__rating-up" data-id={i} data-rating="up" onClick={this.handleRatingUpDown}>+</div>
-                    <div className="items__rating-down" data-id={i} data-rating="down" onClick={this.handleRatingUpDown}>-</div>
-                    <Item key={i}
-                         id={i}
-                         title={el.title}
-                         score={el.score}
-                         user_name={el.owner.display_name}
-                         user_rating={el.owner.reputation}
-                         views={el.view_count}
-                         last_activity_date={el.last_activity_date}
-                    />
+                <div  key={i} className={'row p-2' + (el.is_answered ? ' items__answered' : '')}>
+                    <div className="col-8 items__info" onDoubleClick={this.handleDoubleClick}>
+                        <Item key={i}
+                            id={i}
+                            title={el.title}
+                            score={el.score}
+                            user_name={el.owner.display_name}
+                            user_rating={el.owner.reputation}
+                            views={el.view_count}
+                            last_activity_date={el.last_activity_date}
+                        />
+                    </div>
+                    <div className="col-4 items__nav">
+                        <div className="items__up" data-id={i} data-direction="up" onClick={this.handleUpDown}>up</div>
+                        <div className="items__down" data-id={i} data-direction="down" onClick={this.handleUpDown}>down</div>
+                        <div className="items__rating-up" data-id={i} data-rating="up" onClick={this.handleRatingUpDown}>+</div>
+                        <div className="items__score">{el.score}</div>
+                        <div className="items__rating-down" data-id={i} data-rating="down" onClick={this.handleRatingUpDown}>-</div>
+                    </div>
                 </div>
             )
         });
     }
     render() {
         return(
-            <div className="items">
-                {this.renderItem()}
+            <div className="row items">
+                <div className="col-12">
+                    {this.renderItem()}
+                </div>
             </div>
         )
     }

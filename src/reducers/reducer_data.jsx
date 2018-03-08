@@ -7,7 +7,7 @@ export default function (state = [], action) {
 
         case conf.FETCH_DATA:
             // console.log('from reducer:',action)
-            // TODO: возможно баговоно
+            // TODO: возможно будут баги при 400
             return action.payload.status !== 400 ? action.payload.data.items : action.payload.response.data.error_message;
 
         case conf.SWITCH_ORDER:

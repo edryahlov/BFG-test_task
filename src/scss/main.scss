@@ -1,48 +1,57 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
-$font-family: 'Roboto', sans-serif;
-
+$font-family: 'Roboto',
+sans-serif;
+$font-size: 16px;
 body {
-	font-family: $font-family;
-	font-size: 16px;
+    font-family: $font-family;
+    font-size: $font-size;
 }
 
 header {
-	&>div {
-		display: inline-block;
-		margin: 0 10px;
-	}
-	input {
-		text-align: center;
-		width: 100px;
-		font-family: $font-family;
-	}
-	.hidden {display: none;}
-	.visible {display: inline-block;}
+    &>div>div {
+        display: inline-block;
+        // margin: 0 10px;
+    }
+    input {
+        text-align: center;
+        width: 100px;
+        font-family: $font-family;
+        font-size: $font-size;
+    }
+    .hidden {
+        display: none;
+    }
+    .visible {
+        display: inline-block;
+    }
 }
 
 .items {
-	border: solid 1px;
-
-	&>div {
-		border-bottom: solid 1px;
-		padding: 10px;
-		cursor: pointer;
-
-		&:last-of-type {border-bottom: none}
-	}
-	&__answered {
-		background-color: green;
-	}
-	&__hidden {
-		overflow: hidden;
-		transition: height .3s linear;
-		height: 0;
-	}
-	&__up, &__down, &__rating-up, &__rating-down {
-		padding: 20px;
-		border: dashed 1px;
-		margin: 5px;
-		display: inline-block;
-	}
+    border: solid 1px;
+    &>div {
+        border-bottom: solid 1px;
+        // padding: 10px;
+        cursor: pointer;
+        &:last-of-type {
+            border-bottom: none
+        }
+    }
+    &__answered {
+        background-color: green;
+    }
+    &__hidden {
+        overflow: hidden;
+        transition: height .3s linear;
+        height: 0;
+    }
+    &__up,
+    &__down,
+    &__rating-up,
+    &__rating-down,
+    &__score {
+        padding: 5px;
+        border: dashed 1px;
+        margin: 5px;
+        display: inline-block;
+    }
 }
