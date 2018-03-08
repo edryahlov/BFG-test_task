@@ -40,7 +40,7 @@ class Item extends Component {
     render() {
         return(
             <div key={this.props.id} className={'row p-2 items__deck' + (this.props.is_answered ? ' items__answered' : '')}>
-                <div data-id={this.props.id} className="col-8 items__info" onDoubleClick={this.handleDoubleClick}>
+                <div data-id={this.props.id} className="col-md-8 col-xs-12  items__info" onDoubleClick={this.handleDoubleClick}>
                     {this.props.title}<br/>
                     <div className="items__hidden">
                         Имя создателя вопроса: "{this.props.user_name}"<br/>
@@ -48,11 +48,14 @@ class Item extends Component {
                         Количество просмотров: {this.props.views}<br/>
                     </div>
                 </div>
-                    <div className="items__up" data-id={this.props.id} data-direction="up" onClick={this.handleUpDown}>up</div>
-                    <div className="items__down" data-id={this.props.id} data-direction="down" onClick={this.handleUpDown}>down</div>
+                <div className="col-md-4 col-xs-12 text-right">
                     <div className="items__rating-down" data-id={this.props.id} data-rating="down" onClick={this.handleRatingUpDown}>-</div>
                     <div className="items__score">{this.props.score}</div>
                     <div className="items__rating-up" data-id={this.props.id} data-rating="up" onClick={this.handleRatingUpDown}>+</div>
+
+                    <div className="items__up" data-id={this.props.id} data-direction="up" onClick={this.handleUpDown}>up</div>
+                    <div className="items__down" data-id={this.props.id} data-direction="down" onClick={this.handleUpDown}>down</div>
+                </div>
             </div>
         );
     }

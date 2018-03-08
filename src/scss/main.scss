@@ -63,3 +63,13 @@ header {
         cursor: pointer;
     }
 }
+
+//========================
+// XS
+//========================
+@media (min-width: 480px) and (max-width: 575px) {}
+
+//========================
+// SM
+//========================
+@media (min-width: 576px) and (max-width: 767px) {}
