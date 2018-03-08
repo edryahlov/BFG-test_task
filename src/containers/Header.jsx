@@ -30,7 +30,6 @@ class Header extends Component {
         })
     };
     handleButton = () => {
-        //TODO: сделать кнопку исчезающей - если дата таже через onSelect, а не onChange
         this.props.fetchData(moment(this.state.startDate).unix());
         this.setState({
             prevDate: this.state.startDate,
@@ -48,8 +47,6 @@ class Header extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ fetchData }, dispatch);
-};
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchData }, dispatch);
 
 export default connect(null, mapDispatchToProps)(Header)

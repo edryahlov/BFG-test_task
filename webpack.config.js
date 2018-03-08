@@ -4,11 +4,10 @@ const path = require('path');
 module.exports = {
     entry: [
         'jquery/dist/jquery.min.js',
-        './src/index.js'
+        './src/index.jsx'
     ],
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {

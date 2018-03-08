@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { switchOrder, changeRating } from "../actions/index"
 
-import Item from '../containers/Item'
+import Item from '../components/Item'
 
 class List extends Component {
     constructor(props) {
@@ -76,11 +76,7 @@ class List extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return { fetchedData: state.data };
-};
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ switchOrder, changeRating }, dispatch);
-};
+const mapStateToProps = state => {return { fetchedData: state.data }};
+const mapDispatchToProps = dispatch => bindActionCreators({ switchOrder, changeRating }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)
