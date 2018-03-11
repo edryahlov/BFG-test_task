@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchData } from "../actions/index"
+import { fetchData } from '../actions/index';
 
-import '../scss/main.scss'
-import Header from '../containers/Header'
-import List from '../containers/List'
+import '../scss/main.scss';
+import Header from '../containers/Header';
+import List from '../containers/List';
 
 class App extends Component {
     componentDidMount() {
@@ -15,7 +15,6 @@ class App extends Component {
         return(
             <div className="container">
                 <Header/>
-                <br/><br/>
                 <List/>
             </div>
         );
@@ -24,4 +23,4 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({ fetchData }, dispatch);
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(App);

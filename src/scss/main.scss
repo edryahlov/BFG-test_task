@@ -5,10 +5,29 @@ $font-size: 16px;
 body {
     font-family: $font-family;
     font-size: $font-size;
+    color: #333;
+}
+
+.nobr {
+    white-space: nowrap;
+}
+
+a {
+    text-decoration: underline;
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
 }
 
 header {
-    &>div>div {
+    h1 {
+        font-size: 20px;
+        margin: 40px 0 60px;
+        line-height: 1.5em;
+    }
+    h1>div {
         display: inline-block;
         margin: 0 10px;
     }
@@ -17,6 +36,9 @@ header {
         width: 100px;
         font-family: $font-family;
         font-size: $font-size;
+    }
+    button {
+        font-size: 16px;
     }
     .hidden {
         display: none;
@@ -27,49 +49,69 @@ header {
 }
 
 .items {
-    // border: solid 1px;
-    .items__deck {
-        background-color: silver;
-        // margin-bottom: 10px;
+    &__deck {
+        background-color: #f2f2f2;
+        padding: 10px;
     }
-    .items__deck2 {
+    &__deck2 {
         padding: 0 15px 10px;
     }
     &>div {
         border-bottom: solid 1px;
-        // padding: 10px;
         cursor: pointer;
         &:last-of-type {
             border-bottom: none
         }
     }
     &__answered.items__deck {
-        background-color: green;
+        background-color: #6fcf97;
     }
     &__hidden {
         overflow: hidden;
-        transition: height .3s linear;
+        transition: all .4s linear;
         height: 0;
+        font-size: 14px;
     }
     &__up,
     &__down,
     &__rating-up,
     &__rating-down,
     &__score {
-        padding: 5px;
-        border: dashed 1px;
         margin: 5px;
         display: inline-block;
         cursor: pointer;
+        font-size: 30px;
+        vertical-align: middle;
+        color: #555
+    }
+    &__score {
+        font-size: 20px;
+        &-wrap {
+            margin-right: 20px;
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            padding: 0 15px;
+        }
+    }
+    &__rating-up {
+        font-size: 22px;
     }
 }
 
 //========================
-// XS
+// PHONE FIXES - ex-XS & SM
 //========================
-@media (min-width: 480px) and (max-width: 575px) {}
-
-//========================
-// SM
-//========================
-@media (min-width: 576px) and (max-width: 767px) {}
+@media (min-width: 320px) and (max-width: 767px) {
+    .items {
+        &__deck {
+            padding: 20px 10px;
+        }
+        &__score-wrap {
+            float: left;
+        }
+        &__info {
+            margin-bottom: 10px;
+        }
+    }
+}

@@ -40,9 +40,11 @@ class Header extends Component {
         return(
             <header className="row">
                 <div className="col-12">
-                    5 самых популярных вопросов на StackOverFlow, содержащих "react-redux" в наименовании, начиная с
-                    <DatePicker selected={this.state.startDate} maxDate={moment()} onSelect={this.handleChange} todayButton="Сегодня"/>
-                    <button onClick={this.handleButton} className={this.state.buttonActive ? 'visible': 'hidden'}>Поиск</button>
+                    <h1 className="text-center">
+                        5 самых популярных вопросов на StackOverFlow, содержащих <span className="nobr">"react-redux"</span> в наименовании, начиная с
+                        <DatePicker selected={this.state.startDate} maxDate={moment()} onSelect={this.handleChange} todayButton="Сегодня"/>
+                        <button onClick={this.handleButton} className={this.state.buttonActive ? 'visible': 'hidden'}>Поиск</button>
+                    </h1>
                 </div>
             </header>
         )
@@ -51,4 +53,4 @@ class Header extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({ fetchData }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Header)
+export default connect(null, mapDispatchToProps)(Header);

@@ -7,9 +7,13 @@ export default function (state = [], action) {
     switch (action.type) {
 
         case conf.FETCH_DATA:
-            // console.log('from reducer:',action)
-            // TODO: возможно будут баги при 400
-            return action.payload.status !== 400 ? action.payload.data.items : action.payload.response.data.error_message;
+            // console.log('from reducer1:',action.payload.response.data.error_message)
+            // console.log('from reducer2:',action.payload.response.status) - при ошибке === 400
+            // console.log('from reducer3:',action)
+            // TODO: возможно будут баги при 400 - не известно на сколько забанят, а задание надо сдавать :)
+            // console.log(action)
+            if (action.payload.status === 200) return action.payload.data.items;
+            if (action.payload.response.status === 400) return action.payload.response.data.error_message;
 
         case conf.SWITCH_ORDER:
             temp = newState[action.val1];

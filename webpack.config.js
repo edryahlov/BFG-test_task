@@ -3,7 +3,6 @@ const path = require('path');
 
 module.exports = {
     entry: [
-        'jquery/dist/jquery.min.js',
         './src/index.jsx'
     ],
     module: {
