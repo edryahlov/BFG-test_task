@@ -23,6 +23,11 @@ class List extends Component {
     onDragEnd = result => {
         if (!result.destination) return; // dropped outside the list
         this.props.placeTo(this.props.fetchedData, result.source.index, result.destination.index);
+        const elems = document.querySelector(".items__shown");
+        if (elems !== null){
+            elems.classList.remove("items__shown");
+            elems.classList.add("items__hidden");
+        }
     }
     humanReadableTime = s => {
         let hh = ~~(s/(60*60));

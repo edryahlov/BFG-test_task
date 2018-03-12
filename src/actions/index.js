@@ -2,8 +2,8 @@ import axios from 'axios';
 import * as conf from 'conf';
 
 export const fetchData = (date = conf.DATE) => {
-    // const request = axios.get("http://localhost:3000/db")
-    const request = axios.get(conf.URL + date + conf.RESULTS)
+    const request = axios.get("http://localhost:3000/db")
+        // const request = axios.get(conf.URL + date + conf.RESULTS)
         .then(function(response) {
             // console.log('good response:',response)
             return response

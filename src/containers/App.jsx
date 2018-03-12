@@ -10,12 +10,30 @@ import List from '../containers/List';
 class App extends Component {
     componentDidMount() {
         this.props.fetchData();
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+    setWrapperRef = node => {
+        this.wrapperRef = node;
+    }
+    handleClickOutside = e => {
+        if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+            const elems = document.querySelector(".items__shown");
+            if (elems !== null){
+                elems.classList.remove("items__shown");
+                elems.classList.add("items__hidden");
+            }
+        }
     }
     render() {
         return(
-            <div className="container">
-                <Header/>
-                <List/>
+            <div ref={this.setWrapperRef}>
+                <div className="container">
+                    <Header/>
+                    <List/>
+                </div>
             </div>
         );
     }

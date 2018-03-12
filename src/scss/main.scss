@@ -66,11 +66,16 @@ header {
     &__answered.items__deck {
         background-color: #6fcf97;
     }
-    &__hidden {
+    &__hidden,
+    &__shown {
         overflow: hidden;
         transition: all .4s linear;
         height: 0;
         font-size: 14px;
+    }
+    &__shown {
+        height: 100%;
+        padding: 30px 0 20px;
     }
     &__up,
     &__down,
@@ -96,6 +101,9 @@ header {
     }
     &__rating-up {
         font-size: 22px;
+    }
+    &__info {
+        padding: 20px;
     }
 }
 

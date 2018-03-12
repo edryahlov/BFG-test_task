@@ -10,9 +10,16 @@ class Item extends Component {
         super(props);
     }
     handleClick = (e) => {
-        e.target.children[0].style.height === "100%" ? 
-            e.target.children[0].style.cssText = '' : 
-            e.target.children[0].style.cssText = "height: 100%; padding: 30px 0 20px;"
+        if (e.target.children[0].className === 'items__hidden') {
+            const elems = document.querySelector(".items__shown");
+            if (elems !== null){
+                elems.classList.remove("items__shown");
+                elems.classList.add("items__hidden");
+            }
+            e.target.children[0].className = 'items__shown'
+        } else {
+            e.target.children[0].className = 'items__hidden'
+        }
     }
     handleDoubleClick = (e) => {
         let clicked = +e.target.getAttribute('data-id');
