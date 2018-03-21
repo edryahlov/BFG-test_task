@@ -47,4 +47,7 @@ module.exports = {
         }
     },
     devtool: 'inline-source-map',
+    devServer: {
+        stats: 'errors-only'
+    }
 };
