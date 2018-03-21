@@ -13,7 +13,7 @@ class Header extends Component {
         super(props);
         const startDate = moment().set({'year': 2018, 'month': 0, 'date': 1, 'hour': 0, 'minute': 0, 'second': 0});
         this.state = {
-            startDate: startDate,
+            currentDate: startDate,
             prevDate: startDate,
             buttonActive: false
         };
@@ -21,8 +21,8 @@ class Header extends Component {
     componentDidMount() {
     }
     handleChange = date => {
-        this.setState({startDate: date},()=>{
-            if (moment(this.state.prevDate._d).unix() !== moment(this.state.startDate._d).unix()) {
+        this.setState({currentDate: date}, () => { // "callback hell" - PERHAPS (c) :D
+            if (moment(this.state.prevDate._d).unix() !== moment(this.state.currentDate._d).unix()) {
                 this.setState({buttonActive: true})
             } else {
                 this.setState({buttonActive: false})
@@ -30,9 +30,9 @@ class Header extends Component {
         })
     };
     handleButton = () => {
-        this.props.fetchData(moment(this.state.startDate).unix());
+        this.props.fetchData(moment(this.state.currentDate).unix());
         this.setState({
-            prevDate: this.state.startDate,
+            prevDate: this.state.currentDate,
             buttonActive: false
         })
     };
@@ -42,8 +42,8 @@ class Header extends Component {
                 <div className="col-12">
                     <h1 className="text-center">
                         5 самых популярных вопросов на StackOverFlow, содержащих <span className="nobr">"react-redux"</span> в наименовании, начиная с
-                        <DatePicker selected={this.state.startDate} maxDate={moment()} onSelect={this.handleChange} todayButton="Сегодня"/>
-                        <button onClick={this.handleButton} className={this.state.buttonActive ? 'visible': 'hidden'}>Поиск</button>
+                        <DatePicker selected={this.state.currentDate} maxDate={moment()} onSelect={this.handleChange} todayButton="Сегодня"/>
+                        {this.state.buttonActive ? <button onClick={this.handleButton}>Поиск</button> : null}
                     </h1>
                 </div>
             </header>

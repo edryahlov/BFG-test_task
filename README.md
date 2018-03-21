@@ -10,6 +10,7 @@
 
 **далее:**
 
-- npm run build - продакшн-билд
-- npm run dev - дев-билд
-- npm run watch - вотчер + дев-ребилд
+- npm run build - prod-build
+- npm run dev - dev-build
+- npm run watch - watcher + dev-rebuild
+- npm run serv - dev-serv, reload, watcher
