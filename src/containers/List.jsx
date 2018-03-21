@@ -30,7 +30,7 @@ class List extends Component {
             elems.classList.add("items__hidden");
         }
     }
-    renderItem = () => {
+    renderItem = () => { // I can put it directly to the render, but this will be a kinda ugly imho
         if (!Array.isArray(this.props.fetchedData)) { // in case of IP ban
             const secondsLeft = this.props.fetchedData.replace(/[^0-9]/g,'')
             return <Banned secondsLeft={secondsLeft} />
