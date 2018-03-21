@@ -18,10 +18,8 @@ class Header extends Component {
             buttonActive: false
         };
     }
-    componentDidMount() {
-    }
     handleChange = date => {
-        this.setState({currentDate: date}, () => { // "callback hell" - PERHAPS (c) :D
+        this.setState({currentDate: date}, () => { // "callback hell" - PERHAPS (meme) :D
             if (moment(this.state.prevDate._d).unix() !== moment(this.state.currentDate._d).unix()) {
                 this.setState({buttonActive: true})
             } else {

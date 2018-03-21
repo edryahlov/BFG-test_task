@@ -5,6 +5,7 @@ import { switchOrder, placeTo, changeRating } from '../actions/index';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import Item from '../containers/Item';
+import Banned from '../components/Banned';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -29,45 +30,23 @@ class List extends Component {
             elems.classList.add("items__hidden");
         }
     }
-    humanReadableTime = s => {
-        let hh = ~~(s/(60*60));
-        let mm = ~~(s/60%60);
-        let ss = ~~(s%60);
-        const zero = x => x < 10 ? '0'+x : x;
-        return `${zero(hh)}ч. ${zero(mm)}м. ${zero(ss)}с.`;
-    }
     renderItem = () => {
-        if (!Array.isArray(this.props.fetchedData)) {
-            let seconds400 = this.props.fetchedData.replace(/[^0-9]/g,'')
-            return (
-                <div className="text-center">
-                    <p>Слишком много запросов с этого IP. Разбан через: {this.humanReadableTime(seconds400)}</p>
-                    <p>Можно применить <a href="https://ultrasurf.us/" target="_blank">ultrasurf</a> :)</p>
-                </div>
-            );
+        if (!Array.isArray(this.props.fetchedData)) { // in case of IP ban
+            const secondsLeft = this.props.fetchedData.replace(/[^0-9]/g,'')
+            return <Banned secondsLeft={secondsLeft} />
         }
-        return this.props.fetchedData.map((el,i)=>{
-            return (
-                <Draggable key={i} draggableId={i} index={i}>
-                    {(provided, snapshot) => (
-                        <div>
-                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="items__deck2">
-                                <Item key={i}
-                                    id={i}
-                                    title={el.title}
-                                    score={el.score}
-                                    user_name={el.owner.display_name}
-                                    user_rating={el.owner.reputation}
-                                    views={el.view_count}
-                                    last_activity_date={el.last_activity_date}
-                                    is_answered={el.is_answered ? ' items__answered' : ''}
-                                />
-                            </div>
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Draggable>
-            )
+        return this.props.fetchedData.map((el,i) => {
+            return <Item 
+                        key={i}
+                        id={i}
+                        title={el.title}
+                        score={el.score}
+                        user_name={el.owner.display_name}
+                        user_rating={el.owner.reputation}
+                        views={el.view_count}
+                        last_activity_date={el.last_activity_date}
+                        is_answered={el.is_answered ? ' items__answered' : ''}
+                    />
         });
     }
     render() {
@@ -76,13 +55,11 @@ class List extends Component {
                 <Droppable droppableId="droppable">
                     {(provided, snapshot) => (
                         <div ref={provided.innerRef}>
-
                             <div className="row items">
                                 <div className="col-12">
                                     {this.renderItem()}
                                 </div>
                             </div>
-
                         </div>
                     )}
                 </Droppable>
