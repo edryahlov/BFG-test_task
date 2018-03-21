@@ -19,7 +19,7 @@ class App extends Component {
         this.wrapperRef = node;
     }
     handleClickOutside = e => {
-        // hide all visible details with css effects
+        // hide all visible details with css effects w/o bootstrap
         if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
             const elems = document.querySelector(".items__shown");
             if (elems !== null){

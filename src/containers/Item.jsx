@@ -13,7 +13,7 @@ class Item extends Component {
         super(props);
     }
     handleClick = (e) => {
-        // hide'n'show hidden details with css effects
+        // hide'n'show hidden details with css effects w/o bootstrap
         if (e.target.children[0].className === 'items__hidden') {
             const elems = document.querySelector(".items__shown");
             if (elems !== null){
