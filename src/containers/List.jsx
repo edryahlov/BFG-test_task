@@ -24,13 +24,14 @@ class List extends Component {
     onDragEnd = result => {
         if (!result.destination) return; // dropped outside the list
         this.props.placeTo(this.props.fetchedData, result.source.index, result.destination.index);
+        // manupulate details info with effects and w/o bootstrap
         const elems = document.querySelector(".items__shown");
         if (elems !== null){
             elems.classList.remove("items__shown");
             elems.classList.add("items__hidden");
         }
     }
-    renderItem = () => { // I can put it directly to the render, but this will be a kinda ugly imho
+    renderItem = () => { // I can put this directly to the render, but this will be a kinda ugly imho
         if (!Array.isArray(this.props.fetchedData)) { // in case of IP ban
             const secondsLeft = this.props.fetchedData.replace(/[^0-9]/g,'')
             return <Banned secondsLeft={secondsLeft} />
