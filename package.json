@@ -5,7 +5,7 @@
     "main": "App.jsx",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "webpack --mode production",
+        "build": "webpack --mode production --optimize-minimize",
         "dev": "webpack --mode development",
         "watch": "webpack --mode development --watch",
         "serv": "webpack-dev-server --hot --inline --mode development"

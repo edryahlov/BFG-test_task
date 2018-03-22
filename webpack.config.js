@@ -46,7 +46,7 @@ module.exports = {
             conf: path.resolve(__dirname, 'src/conf.js')
         }
     },
-    devtool: 'inline-source-map',
+    //devtool: 'inline-source-map',
     devServer: {
         stats: 'errors-only'
     }
